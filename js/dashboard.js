@@ -17,6 +17,9 @@ auth.onAuthStateChanged(user => {
 var ddbb;
 var $oldMoney;
 let isFirstTime = true;
+
+let cashin = document.getElementById('cashinSound');
+let cashout = document.getElementById('cashoutSound');
 function updateCurrent(){
     firebase.database().ref().child('users').child(UID).get().then(snapshot => {
         if (snapshot.exists()){
@@ -139,7 +142,7 @@ function sendSection(d){
                 })
             })
         })
-
+        cashout.play();
         alert(`Success: You successfully sent $ ${$sentMoney} to ${$address}.`);
     }
 }
@@ -162,6 +165,7 @@ function main(d){
             $oldMoney = data.wallet.bal;
             isFirstTime=false;
         }else if(data.wallet.bal>$oldMoney){
+            cashin.play();
             alert(`You successfully receieved $${data.wallet.bal-$oldMoney} from your friend.`);
             $oldMoney = data.wallet.bal;
         }

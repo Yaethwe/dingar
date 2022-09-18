@@ -42,6 +42,13 @@ min-width:50vw;
 border:1px solid blue;
 `;
 dashboardDiv.appendChild($myAddress);
+var $copyAddressBtn = document.createElement('button');
+$copyAddressBtn.textContent="copy"
+$copyAddressBtn.className="btn btn-dark"
+$copyAddressBtn.onclick=()=>{
+    navigator.clipboard.writeText(UID);
+}
+dashboardDiv.appendChild($copyAddressBtn);
 var $label = document.createElement('label');
 updateBal();
 $label.style=`

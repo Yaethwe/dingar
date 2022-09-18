@@ -31,38 +31,14 @@ function show(){
         profileBox.innerHTML=`
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-    <img src="../img/Gold-coin.svg" width="100px">
-    <label>name :${data.user.name}</label><br>
-    <label>email: ${data.user.email}</label><br>
-    </div>
-    <div class="col-sm">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">Biography</h5>
-            <h6 class="card-subtitle mb-2 text-muted">age: ${new Date().getFullYear()-parseInt(data.user.birthYear)}</h6>
-            <p class="card-text">${data.user.bio}</p>
-            <a href="https://cooldevs.netlify.app/pages/browse.html?emailsearch=${btoa(data.user.email)}" class="card-link">Profile Link</a><br><button class="btn btn-dark" onclick="navigator.clipboard.writeText('https://cooldevs.netlify.app/pages/browse.html?emailsearch=${btoa(data.user.email)}');alert('Copied to clipboard.');">Copy Link</button>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm">
-      This web application is created by Cool-Devs.
-    </div>
-  </div>
-</div>
-
-    
-
-    `;
-    }else{
-        profileBox.innerHTML=`
-    <div class="container">
-        <div class="row">
         <div class="col-sm">
-        <img src="${data.user.profilePicture}" width="100px">
-        <label>name :${data.user.name}</label><br>
-        <label>email: ${data.user.email}</label><br>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${data.user.name}</h5>
+                    <img src="${data.user.profilePicture}" width="100px" calss="rounded-circle">
+                    <label>Email Address: ${data.user.email}</label><br>
+                </div>
+            </div>
         </div>
         <div class="col-sm">
             <div class="card" style="width: 18rem;">
@@ -75,8 +51,54 @@ function show(){
             </div>
         </div>
         <div class="col-sm">
-            This web application is created by Cool-Devs.
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Creators of this app</h5>
+                    <center><img src="https://cooldevs.netlify.app/img/fav.png" width="100px"></center>
+                    <br>
+                    This web application is created by Cool-Devs. <a href="https://cooldevs.netlify.app/" class="card-link">Click here to visit our website.</a>
+                </div>
+            </div>
         </div>
+  </div>
+</div>
+
+    
+
+    `;
+    }else{
+        profileBox.innerHTML=`
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${data.user.name}</h5>
+                        <img src="${data.user.profilePicture}" width="100px" class="rounded-circle">
+                        <label>Email Address: ${data.user.email}</label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">Biography</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">age: ${new Date().getFullYear()-parseInt(data.user.birthYear)}</h6>
+                    <p class="card-text">${data.user.bio}</p>
+                    <a href="https://cooldevs.netlify.app/pages/browse.html?emailsearch=${btoa(data.user.email)}" class="card-link">Profile Link</a><br><button class="btn btn-dark" onclick="navigator.clipboard.writeText('https://cooldevs.netlify.app/pages/browse.html?emailsearch=${btoa(data.user.email)}');alert('Copied to clipboard.');">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Creators of this app</h5>
+                        <center><img src="https://cooldevs.netlify.app/img/fav.png" width="100px"></center>
+                        <br>
+                        This web application is created by Cool-Devs. <a href="https://cooldevs.netlify.app/" class="card-link">Click here to visit our website.</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     `;

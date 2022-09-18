@@ -43,7 +43,15 @@ function updateTransactions(){
     })
 }
 
-updateTransactions()
+auth.onAuthStateChanged(user => {
+	if(user){
+        UID = user.uid;
+        updateTransactions();
+    }else{
+        location.href=`../index.html`;
+    }
+});
+
 
 db.child('transactions').on("child_changed", ()=>{
     updateTransactions()

@@ -15,6 +15,8 @@ auth.onAuthStateChanged(user => {
     }
 });
 var ddbb;
+var $oldMoney;
+let isFirstTime = true;
 function updateCurrent(){
     firebase.database().ref().child('users').child(UID).get().then(snapshot => {
         if (snapshot.exists()){
@@ -47,6 +49,7 @@ $copyAddressBtn.textContent="copy"
 $copyAddressBtn.className="btn btn-dark"
 $copyAddressBtn.onclick=()=>{
     navigator.clipboard.writeText(UID);
+    alert('Copied to clipboard.');
 }
 dashboardDiv.appendChild($copyAddressBtn);
 var $label = document.createElement('label');
@@ -155,7 +158,14 @@ function main(d){
     $myAddress.textContent=UID;
     if(d.wallet.bal){
         data.wallet.bal=d.wallet.bal;
-        updateBal();
+        if(isFirstTime){
+            $oldMoney = data.wallet.bal;
+            isFirstTime=false;
+        }else if(data.wallet.bal>$oldMoney){
+            alert(`You successfully receieved $${data.wallet.bal-$oldMoney} from your friend.`);
+            $oldMoney = data.wallet.bal;
+        }
+        updateBal()
     }else{
         firebase.database().ref().child('users').child(UID).update(
             {

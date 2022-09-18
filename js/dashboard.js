@@ -90,6 +90,8 @@ $sentBtn.onclick=()=>{
     firebase.database().ref().child("users").child($address).get().then(e=>{
         if(e.exists()){
             sendSection(e.val());
+        }else{
+            alert("Fail: Invlaid Address.");
         }
     })
 };
@@ -106,7 +108,7 @@ function sendSection(d){
         alert('Fail: You need to check you balance.');
     }else if($sentMoney<0){
         alert('Fail: Send money can\'t be less then \'0\'.');
-    }else if(typeof($sentMoney) != "number"){
+    }else if(typeof(parseFloat($sentMoney)) != "number"){
         alert('Fail: Send money can\'t be a string.');
     }else{
         db.child("users").child($address).update({
@@ -134,6 +136,8 @@ function sendSection(d){
                 })
             })
         })
+
+        alert(`Success: You successfully sent $ ${$sentMoney} to ${$address}.`);
     }
 }
 dashboardDiv.appendChild($sentBtn);

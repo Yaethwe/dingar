@@ -106,6 +106,8 @@ function sendSection(d){
         alert('Fail: You need to check you balance.');
     }else if($sentMoney<0){
         alert('Fail: Send money can\'t be less then \'0\'.');
+    }else if(typeof($sentMoney) != "number"){
+        alert('Fail: Send money can\'t be a string.');
     }else{
         db.child("users").child($address).update({
             wallet:{

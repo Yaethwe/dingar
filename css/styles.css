@@ -1,0 +1,15 @@
+body{
+    margin:0px;
+    padding:0px;
+    background-color:aliceblue;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+#transactionBox{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+}

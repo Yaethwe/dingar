@@ -7,17 +7,15 @@ function removeAllChild(){
 }
 let $transactionData,$transactions,$transactionCount;
 
-
+let currentDate = new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+new Date().getDate();
 function updateTransactions(){
     removeAllChild()
-    db.child('transactions').get().then(ss=>{
+    db.child('transactions').child(currentDate).get().then(ss=>{
         if(ss.exists()){
             $transactionData = ss.val()
-            $transactionCount = $transactionData.count;
-            $transactions = $transactionData.data
-            for (let i = 0; i <= $transactionCount; i++){
-                let dd = $transactionData.data;
-                if(dd[i]){
+            let i = $transactionData;
+            for (item in $transactionData){
+                if(i[item]){
                     let $div = document.createElement('div');
 
                     $div.style=`
@@ -29,10 +27,9 @@ function updateTransactions(){
                     margin:5px;
                     `;
                     $div.innerHTML=`
-                    <p>from: ${dd[i].from} to: ${dd[i].to}</p>
-                    <p>ammount: <span style="background-color: gold; color:white; border-radius:20px;padding:5px;">$ ${dd[i].ammount}</span> date: ${dd[i].time}</p>
+                    <p>from: ${i[item].from} to: ${i[item].to}</p>
+                    <p>ammount: <span style="background-color: gold; color:white; border-radius:20px;padding:5px;">$ ${i[item].ammount}</span> date: ${i[item].time}</p>
                     `;
-
                     $transactionBox.appendChild($div);
                 }else{
                     continue;

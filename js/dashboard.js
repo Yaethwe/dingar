@@ -134,16 +134,19 @@ function sendSection(d){
             db.child('transactions').update({
                 count:d.count+1,
             }).then(()=>{
-                db.child('transactions').child('data').child(d.count+1).set({
+                let currentDate = new Date().getFullYear()+"/"+(new Date().getMonth()+1)+"/"+new Date().getDate();
+                db.child('transactions').child(currentDate).child(d.count+1).set({
                     from:UID,
                     to:$address,
-                    time:(new Date().getMonth()+1)+"/"+new Date().getDate()+"/"+new Date().getFullYear(),
+                    time:currentDate,
                     ammount:$sentMoney,
                 })
             })
         })
         cashout.play();
-        alert(`Success: You successfully sent $ ${$sentMoney} to ${$address}.`);
+        cashout.addEventListener('ended', function(){
+            alert(`Success: You successfully sent $ ${$sentMoney} to ${$address}.`);
+        }, false);
     }
 }
 dashboardDiv.appendChild($sentBtn);
@@ -166,7 +169,9 @@ function main(d){
             isFirstTime=false;
         }else if(data.wallet.bal>$oldMoney){
             cashin.play();
-            alert(`You successfully receieved $${data.wallet.bal-$oldMoney} from your friend.`);
+            cashin.addEventListener('ended', function(){
+                alert(`You successfully receieved $${data.wallet.bal-$oldMoney} from your friend.`);
+            }, false);
             $oldMoney = data.wallet.bal;
         }
         updateBal()
@@ -187,4 +192,5 @@ function main(d){
     });
 }
 
+updateCurrent();
 
